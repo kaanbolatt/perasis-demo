@@ -1,0 +1,42 @@
+<div class="card">
+    <p-table
+        [value]="customers.data"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10, 25, 50]"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:25%">Firma</th>
+                <th style="width:25%">Grup</th>
+                <th style="width:25%">Ad</th>
+                <th style="width:25%">Soyad</th>
+                <th style="width:25%">E-posta</th>
+                <th style="width:25%">Telefon</th>
+                <th style="width:25%">İl</th>
+                <th style="width:25%">İlçe</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+            <tr>
+                <td>{{ customer.firma }}</td>
+                <td>{{ customer.grup }}</td>
+                <td>{{ customer.ad }}</td>
+                <td>{{ customer.soyad }}</td>
+                <td>{{ customer.eposta }}</td>
+                <td>{{ customer.telefon }}</td>
+                <td>{{ customer.il }}</td>
+                <td>{{ customer.ilce }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>
