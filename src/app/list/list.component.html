@@ -1,42 +1,27 @@
 <div class="card">
-    <p-table
-        [value]="customers.data"
-        [paginator]="true"
-        [rows]="5"
-        [showCurrentPageReport]="true"
-        [tableStyle]="{ 'min-width': '50rem' }"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [rowsPerPageOptions]="[10, 25, 50]"
-    >
-        <ng-template pTemplate="header">
+    <p-button (click)="groupByFirma(customers.data)" class="ml-5"><i class="pi pi-pencil"></i><span class="ml-3">Firmaya Göre</span></p-button>
+    <p-button (click)="groupByCity(customers.data)" class="ml-5"><i class="pi pi-pencil"></i><span class="ml-3">Şehire Göre</span></p-button>
+    <p-button (click)="groupByGrup(customers.data)" class="ml-5"><i class="pi pi-pencil"></i><span class="ml-3">Gruba Göre</span></p-button>
+    <p-treeTable [value]="files" [columns]="cols" [paginator]="true" [rows]="selectedRow" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+        <ng-template pTemplate="header" let-columns>
             <tr>
-                <th style="width:25%">Firma</th>
-                <th style="width:25%">Grup</th>
-                <th style="width:25%">Ad</th>
-                <th style="width:25%">Soyad</th>
-                <th style="width:25%">E-posta</th>
-                <th style="width:25%">Telefon</th>
-                <th style="width:25%">İl</th>
-                <th style="width:25%">İlçe</th>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-customer>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
             <tr>
-                <td>{{ customer.firma }}</td>
-                <td>{{ customer.grup }}</td>
-                <td>{{ customer.ad }}</td>
-                <td>{{ customer.soyad }}</td>
-                <td>{{ customer.eposta }}</td>
-                <td>{{ customer.telefon }}</td>
-                <td>{{ customer.il }}</td>
-                <td>{{ customer.ilce }}</td>
+                <td *ngFor="let col of columns; let i = index">
+                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+                    {{ rowData[col.field] }}
+                </td>
             </tr>
         </ng-template>
-        <ng-template pTemplate="paginatorleft">
-            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-        </ng-template>
-        <ng-template pTemplate="paginatorright">
-            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-        </ng-template>
-    </p-table>
+    </p-treeTable>
+    <div class="row">
+        <p> <label for="mail">Toplam Veri Sayısı: {{customers.totalRecords}}</label></p>
+        <label for="mail">Satır Sayısı: </label>
+        <p-dropdown [options]="selectableRows" class="ml-3" [(ngModel)]="selectedRow" (onChange)="onRowsChange($event.value)" optionLabel="name" optionValue="value"></p-dropdown>
+    </div>
 </div>

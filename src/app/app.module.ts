@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { TreeTableModule } from 'primeng/treetable';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +19,11 @@ import { ButtonModule } from 'primeng/button';
     BrowserModule,
     AppRoutingModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    TreeTableModule,
+    DropdownModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
